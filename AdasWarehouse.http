@@ -1,0 +1,6 @@
+@AdasWarehouse_HostAddress = http://localhost:5072
+
+GET {{AdasWarehouse_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
