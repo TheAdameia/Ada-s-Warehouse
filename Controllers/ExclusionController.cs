@@ -6,6 +6,8 @@ using AdasWarehouse.Models;
 
 namespace AdasWarehouse.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
 public class ExclusionController : ControllerBase
 {
     private AdasWarehouseDbContext _dbContext;

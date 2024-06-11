@@ -5,6 +5,8 @@ using AdasWarehouse.Data;
 using AdasWarehouse.Models;
 
 namespace AdasWarehouse.Controllers;
+[ApiController]
+[Route("api/[controller]")]
 
 public class ItemCategoryController : ControllerBase
 {

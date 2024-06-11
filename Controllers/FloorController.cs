@@ -6,6 +6,9 @@ using AdasWarehouse.Models;
 
 namespace AdasWarehouse.Controllers;
 
+[ApiController]
+[Route("api/[controller]")]
+
 public class FloorController : ControllerBase
 {
     private AdasWarehouseDbContext _dbContext;
