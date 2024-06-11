@@ -135,7 +135,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 1,
-                FloorId = 0,
+                FloorId = 1,
                 Weight = 500,
                 UserId = 1,
                 Description = "Old tax paperwork"
@@ -143,7 +143,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 2,
-                FloorId = 0,
+                FloorId = 3,
                 Weight = 10000,
                 UserId = 1,
                 Description = "Acetone"
@@ -151,7 +151,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 3,
-                FloorId = 0,
+                FloorId = 2,
                 Weight = 15000,
                 UserId = 1,
                 Description = "Train engine"
@@ -159,7 +159,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 4,
-                FloorId = 0,
+                FloorId = 1,
                 Weight = 25000,
                 UserId = 1,
                 Description = "Giant bucket of sand"
@@ -167,7 +167,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 5,
-                FloorId = 0,
+                FloorId = 5,
                 Weight = 3505,
                 UserId = 1,
                 Description = "An old car"
