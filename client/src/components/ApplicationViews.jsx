@@ -7,6 +7,7 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <Routes>
       <Route path="/">
+      <Route index element={<>Home Page</>} />
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}
