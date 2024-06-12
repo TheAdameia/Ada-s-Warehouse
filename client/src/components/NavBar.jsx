@@ -33,6 +33,11 @@ return (
                         My Items
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/createitem">
+                        Create Item
+                    </NavLink>
+                </NavItem>
             </Nav>
             </Collapse>
             <Button

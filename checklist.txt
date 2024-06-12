@@ -18,3 +18,14 @@ What controllers are absolutely essential for the MVP wireframe as it exists?
     2. Delete ✔
 
 everything will have a get all even if it doesn't need it (mostly for testing purposes)
+
+Ok, how do I go about writing the rest of the frontend?
+
+1. Create item navbar button ✔
+2. Create item page, form ✔
+3. edit and delete button for items
+
+I will also need to do the following per userstories:
+
+1. Edit will need to allow the change of floors and block inappropriate placement per Exclusions
+2. I will need to find a solution to make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
