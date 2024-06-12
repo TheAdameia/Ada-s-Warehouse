@@ -65,32 +65,17 @@ public class ItemController : ControllerBase
 
     [HttpDelete("{id}")]
     //[Authorize]
-    public IActionResult ToggleItem(int id, int? newFloorId)
-    // ok. PSQL/EFC is too smart to let me reassign this to a nonexistent floor. I will have to nuke the database and start over, adding a key to Items for activity. Or I could just do a simpler delete? Decisions.
+    public IActionResult DeleteItem(int id)
+    // ok. This works but it doesn't delete ItemCategory. Will have to fix that.
     {
-        Item itemToToggle = _dbContext.Items.SingleOrDefault(i => i.ItemId == id);
-        if (itemToToggle.ItemId == null)
+        Item itemToDelete = _dbContext.Items.SingleOrDefault(i => i.ItemId == id);
+        if (itemToDelete.ItemId == null)
         {
             return NotFound();
         }
-        else if (id != itemToToggle.ItemId)
-        {
-            return BadRequest();
-        }
-
-        if (itemToToggle.FloorId != 0)
-        {
-            itemToToggle.FloorId = 0;
-            _dbContext.SaveChanges();
-            return NoContent();
-        }
-        else if (newFloorId != null)
-        {
-            itemToToggle.FloorId = (int)newFloorId;
-            _dbContext.SaveChanges();
-            return NoContent();
-        }
-
-        return BadRequest("No new floorId entered");
+        
+        _dbContext.Items.Remove(itemToDelete);
+        _dbContext.SaveChanges();
+        return NoContent();
     }
 }
