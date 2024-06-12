@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
+import { ItemCard } from "./ItemCard"
+import { GetUserItems } from "../../managers/itemManager"
 
 
-export const ItemList = () => {
+export const ItemList = ({ loggedInUser }) => {
     const [items, setItems] = useState([])
-    // filter for just the user's items? different endpoint?
 
     const getItems = () => {
-        //get then set
+        GetUserItems(loggedInUser.id).then(setItems)
     }
 
     useEffect(() => {
@@ -14,14 +15,18 @@ export const ItemList = () => {
     }, [])
 
     return (
-        <div>
-            <h2>Items</h2>
-            {items.map((item) => (
-                <ItemCard
-                    item={item}
-                    key={`item-${item.itemId}`}
-                ></ItemCard>
-            ))}
+        <div className="items-container">
+            <h2>My Items</h2>
+            <article className="items">
+                {items.map((item) => {
+                    return (
+                        <ItemCard
+                            item={item}
+                            key={`item-${item.itemId}`}
+                        ></ItemCard>
+                    )
+                })}
+            </article>
         </div>
     )
 }

@@ -27,18 +27,24 @@ return (
         <>
             <NavbarToggler onClick={toggleNavbar} />
             <Collapse isOpen={open} navbar>
-            <Nav navbar></Nav>
+            <Nav navbar>
+                <NavItem>
+                    <NavLink tag={RRNavLink} to="/items">
+                        My Items
+                    </NavLink>
+                </NavItem>
+            </Nav>
             </Collapse>
             <Button
-            color="primary"
-            onClick={(e) => {
-                e.preventDefault();
-                setOpen(false);
-                logout().then(() => {
-                setLoggedInUser(null);
-                setOpen(false);
-                });
-            }}
+                color="primary"
+                onClick={(e) => {
+                    e.preventDefault();
+                    setOpen(false);
+                    logout().then(() => {
+                    setLoggedInUser(null);
+                    setOpen(false);
+                    });
+                }}
             >
             Logout
             </Button>
@@ -46,9 +52,9 @@ return (
         ) : (
         <Nav navbar>
             <NavItem>
-            <NavLink tag={RRNavLink} to="/login">
-                <Button color="primary">Login</Button>
-            </NavLink>
+                <NavLink tag={RRNavLink} to="/login">
+                    <Button color="primary">Login</Button>
+                </NavLink>
             </NavItem>
         </Nav>
         )}
