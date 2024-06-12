@@ -9,9 +9,9 @@ What controllers are absolutely essential for the MVP wireframe as it exists?
 > Exclusions ✔
     1. Get all Exclusions ✔
 > Items
-    1. Get items by user
-    2. Create items
-    3. Edit items
+    1. Get items by user ✔
+    2. Create items ✔
+    3. Edit items ✔
     4. Soft delete/restore item
 > ItemCategories
     1. Add
