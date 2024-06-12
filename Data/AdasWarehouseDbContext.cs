@@ -7,7 +7,11 @@ namespace AdasWarehouse.Data;
 public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
 {
     private readonly IConfiguration _configuration;
-
+    public DbSet<Category> Categories { get; set; }
+    public DbSet<Exclusion> Exclusions { get; set; }
+    public DbSet<Floor> Floors { get; set; }
+    public DbSet<Item> Items { get; set; }
+    public DbSet<ItemCategory> ItemCategories { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }
 
     public AdasWarehouseDbContext(DbContextOptions<AdasWarehouseDbContext> context, IConfiguration config) : base(context)
