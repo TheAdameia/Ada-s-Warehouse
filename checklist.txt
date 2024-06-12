@@ -1,0 +1,20 @@
+
+
+What controllers are absolutely essential for the MVP wireframe as it exists?
+
+> Floors ✔
+    1. Get all Floors ✔
+> Categories ✔
+    1. Get all Categories ✔
+> Exclusions ✔
+    1. Get all Exclusions ✔
+> Items ✔
+    1. Get items by user ✔
+    2. Create items ✔
+    3. Edit items ✔
+    4. delete item ✔
+> ItemCategories ✔
+    1. Add ✔
+    2. Delete ✔
+
+everything will have a get all even if it doesn't need it (mostly for testing purposes)
