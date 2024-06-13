@@ -22,6 +22,8 @@ public class FloorController : ControllerBase
     // [Authorize]
     public IActionResult Get()
     {
-        return Ok(_dbContext.Floors.ToList());
+        return Ok(_dbContext.Floors
+        .Include(f => f.Items)
+        .ToList());
     }
 }

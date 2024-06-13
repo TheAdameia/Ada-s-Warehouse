@@ -33,6 +33,13 @@ public class ItemController : ControllerBase
         .ToList());
     }
 
+    [HttpGet("single/{id}")]
+    public IActionResult GetOneItem(int id)
+    {
+        return Ok(_dbContext.Items
+        .SingleOrDefault(i => i.ItemId == id));
+    }
+
     [HttpPost]
     //[Authorize]
     public IActionResult CreateItem(Item item)
@@ -67,6 +74,7 @@ public class ItemController : ControllerBase
     //[Authorize]
     public IActionResult DeleteItem(int id)
     // ok. This works but it doesn't delete ItemCategory. Will have to fix that.
+    // Will fix instead by implementing a soft delete.
     {
         Item itemToDelete = _dbContext.Items.SingleOrDefault(i => i.ItemId == id);
         if (itemToDelete.ItemId == null)

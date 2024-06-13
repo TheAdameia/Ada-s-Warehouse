@@ -21,7 +21,7 @@ export const logout = () => {
 };
 
 export const tryGetLoggedInUser = () => {
-  return fetch(_apiUrl + "/me").then((res) => {
+  return fetch(_apiUrl + "/Me").then((res) => {
     return res.status === 401 ? Promise.resolve(null) : res.json();
   });
 };
