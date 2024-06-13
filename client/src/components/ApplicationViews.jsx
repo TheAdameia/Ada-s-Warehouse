@@ -4,12 +4,13 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import { ItemList } from "./Items/ItemList";
 import { ItemForm } from "./Items/ItemForm";
+import { FloorList } from "./Floors/FloorList";
 
 export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <Routes>
       <Route path="/">
-      <Route index element={<>Login page PLACEHOLDER fill me with something</>} />
+      <Route index element={<FloorList />} />
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

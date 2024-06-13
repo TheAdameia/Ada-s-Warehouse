@@ -7,7 +7,7 @@ export const FloorList = () => {
     const [floors, setFloors] = useState([])
 
     const getAndSetFloors = () => {
-        GetAllFloors.then(setFloors)
+        GetAllFloors().then(setFloors)
     }
 
     useEffect(() => {
