@@ -6,12 +6,12 @@ import { GetUserItems } from "../../managers/itemManager"
 export const ItemList = ({ loggedInUser }) => {
     const [items, setItems] = useState([])
 
-    const getItems = () => {
+    const getAndSetItems = () => {
         GetUserItems(loggedInUser.id).then(setItems)
     }
 
     useEffect(() => {
-        getItems()
+        getAndSetItems()
     }, [])
 
     return (
@@ -23,6 +23,7 @@ export const ItemList = ({ loggedInUser }) => {
                         <ItemCard
                             item={item}
                             key={`item-${item.itemId}`}
+                            getAndSetItems={getAndSetItems}
                         ></ItemCard>
                     )
                 })}

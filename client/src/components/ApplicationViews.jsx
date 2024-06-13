@@ -24,16 +24,19 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
           <AuthorizedRoute loggedInUser={loggedInUser}>
             <ItemList loggedInUser={loggedInUser} />
           </AuthorizedRoute>
-        }
-      />
+        }/>
+        <Route path=":itemId" element={
+          <AuthorizedRoute loggedInUser={loggedInUser}>
+            <ItemForm loggedInUser={loggedInUser} />
+          </AuthorizedRoute>
+        }/>
       </Route>
       <Route path="/createitem">
         <Route index element={
           <AuthorizedRoute loggedInUser={loggedInUser}>
             <ItemForm loggedInUser={loggedInUser} />
           </AuthorizedRoute>
-        }
-      />
+        }/>
       </Route>
       <Route path="*" element={<p>Whoops, nothing here...</p>} />
     </Routes>
