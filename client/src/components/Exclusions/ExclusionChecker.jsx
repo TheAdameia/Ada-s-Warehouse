@@ -2,12 +2,13 @@ import { useEffect, useState } from "react"
 import { GetOneFloor } from "../../managers/floorManager"
 import { GetAllExclusions } from "../../managers/exclusionManager"
 
-export const ExclusionChecker = ({SuggestedItem}) => {
+export const ExclusionChecker = ({ passedItem }) => {
     const [oneFloor, setOneFloor] = useState({})
     const [exclusions, setExclusions] = useState([])
 
-    const getAndSetOneFloor = (SuggestedItem) => {
-        GetOneFloor(SuggestedItem.floorId).then(setOneFloor)
+    const getAndSetOneFloor = (passedItem) => {
+        const oneFloorId = passedItem.floorId
+        GetOneFloor(oneFloorId).then(setOneFloor)
     }
 
     const getAndSetExclusions =() => {
@@ -16,8 +17,10 @@ export const ExclusionChecker = ({SuggestedItem}) => {
 
 
     useEffect(() => {
-        getAndSetOneFloor(SuggestedItem)
-    }, [SuggestedItem])
+        if (passedItem.floorId != 0){
+            getAndSetOneFloor(passedItem)
+        }
+    }, [passedItem])
 
     useEffect(() => {
         getAndSetExclusions()
@@ -26,7 +29,7 @@ export const ExclusionChecker = ({SuggestedItem}) => {
     return (
         <div>
             <div>
-            {(oneFloor.totalWeight < oneFloor.remainingStorage + SuggestedItem.weight) ? "bad weight" : "good weight"}
+            {oneFloor.remainingStorage < passedItem.weight ? "WARNING: maximum weight exceeded" : "weight within capacity"}
             </div>
             <div>
 
