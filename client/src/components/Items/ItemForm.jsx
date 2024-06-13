@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { Button, FormGroup, Input, Label, Form } from "reactstrap";
-import { GetOneItem, PostItem } from "../../managers/itemManager";
+import { EditItem, GetOneItem, PostItem } from "../../managers/itemManager";
 
 
 export const ItemForm = ({ loggedInUser }) => {
@@ -29,8 +29,18 @@ export const ItemForm = ({ loggedInUser }) => {
         GetOneItem(id).then(setItemToEdit)
     }
 
-    const handleEdit = () => {
-        console.log("Quack!!");
+    const handleEdit = (event) => {
+        event.preventDefault()
+        const editedItem = {
+            itemId: parseInt(itemId),
+            floorId: itemFloor,
+            weight: itemWeight,
+            description: itemDescription,
+            userId: loggedInUser.id
+        }
+        EditItem(editedItem).then(() => {
+            navigate("/items")
+        })
     }
 
     useEffect(() => {

@@ -11,5 +11,5 @@ public class Item
     public int Weight { get; set; }
     public int UserId { get; set; }
     public string Description { get; set; }
-    public List<ItemCategory> ItemCategories { get; set; }
+    public List<ItemCategory>? ItemCategories { get; set; }
 }

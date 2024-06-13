@@ -30,6 +30,7 @@ I will also need to do the following per userstories:
 1. Edit will need to allow the change of floors and block inappropriate placement per Exclusions
 2. I will need to find a solution to make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
 3. FLoors. Need floors on the main page. Need a calculated property for weight? ✔
+4. Add readme!!!!
 
 Extras that make sense but aren't in stretch goals:
 

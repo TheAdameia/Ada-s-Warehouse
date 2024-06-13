@@ -51,20 +51,21 @@ public class ItemController : ControllerBase
 
     [HttpPut("{id}")]
     //[Authorize]
-    public IActionResult EditItem(Item item, int id)
+    public IActionResult EditItem(Item item)
     {
-        Item itemToUpdate = _dbContext.Items.SingleOrDefault(i => i.ItemId == id);
+        Item itemToUpdate = _dbContext.Items.SingleOrDefault(i => i.ItemId == item.ItemId);
         if (itemToUpdate == null)
         {
             return NotFound();
         }
-        else if (id != itemToUpdate.ItemId)
+        else if (item.UserId != itemToUpdate.UserId)
         {
-            return BadRequest();
+            return BadRequest("Not the right user");
         }
 
         itemToUpdate.Description = item.Description;
         itemToUpdate.FloorId = item.FloorId;
+        itemToUpdate.Weight = item.Weight;
 
         _dbContext.SaveChanges();
         return NoContent();
