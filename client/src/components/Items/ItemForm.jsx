@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { Button, FormGroup, Input, Label, Form } from "reactstrap";
 import { EditItem, GetOneItem, PostItem } from "../../managers/itemManager";
+import { ExclusionChecker } from "../Exclusions/ExclusionChecker";
 
 
 export const ItemForm = ({ loggedInUser }) => {
@@ -9,6 +10,10 @@ export const ItemForm = ({ loggedInUser }) => {
     const [itemFloor, setItemFloor] = useState(0)
     const [itemWeight, setItemWeight] = useState(0)
     const [itemToEdit, setItemToEdit] = useState()
+    const [passedItem, setPassedItem] = useState({
+        description: "", 
+        weight: 0, 
+        floorId: 0})
     const { itemId } = useParams()
     const navigate = useNavigate()
 
@@ -92,6 +97,8 @@ export const ItemForm = ({ loggedInUser }) => {
                         }}
                     />
                 </FormGroup>
+                <ExclusionChecker
+
                 <>
                     { itemId == null ?
                     <Button

@@ -26,4 +26,15 @@ public class FloorController : ControllerBase
         .Include(f => f.Items)
         .ToList());
     }
+
+    [HttpGet("{id}")]
+    // [Authorize]
+    public IActionResult GetOneFloor(int id)
+    {
+        return Ok(_dbContext.Floors
+        .Include(f => f.Items)
+            .ThenInclude(i => i.ItemCategory)
+                .ThenInclude(ic => ic.Category)
+        .SingleOrDefault(f => f.FloorId == id));
+    }
 }
