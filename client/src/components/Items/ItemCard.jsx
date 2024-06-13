@@ -12,8 +12,8 @@ export const ItemCard = ({ item, getAndSetItems }) => {
         })
     }
 
-    const handleEdit = () => {
-        navigate(`/`)
+    const handleEdit = (id) => {
+        navigate(`/items/${id}`)
     }
 
     return (
@@ -22,11 +22,12 @@ export const ItemCard = ({ item, getAndSetItems }) => {
                 <CardTitle tag="h5">Item {item.itemId}: {item.description}</CardTitle>
                 <CardSubtitle>Owner: User #{item.userId}</CardSubtitle>
                 <CardText>Weight: {item.weight}</CardText>
+                <CardText></CardText>
                 <Button
-                    
-                >Placeholder!</Button>
+                    onClick={() => handleEdit(item.itemId)}
+                >Edit Item</Button>
                 <Button
-                    onClick={handleDelete}
+                    onClick={() => handleDelete}
                 >Delete Item</Button>
             </CardBody>
         </Card>

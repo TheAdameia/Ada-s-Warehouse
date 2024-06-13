@@ -29,4 +29,13 @@ I will also need to do the following per userstories:
 
 1. Edit will need to allow the change of floors and block inappropriate placement per Exclusions
 2. I will need to find a solution to make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
-3. FLoors. Need floors on the main page. Need a calculated property for weight?
+3. FLoors. Need floors on the main page. Need a calculated property for weight? ✔
+
+Extras that make sense but aren't in stretch goals:
+
+1. Display categories for items
+2. Display exclusions for floors
+3. Display actual owner name on items
+4. Add DTOs for returns for security and sensibility
+
+Stretch goals: see capstone proposal

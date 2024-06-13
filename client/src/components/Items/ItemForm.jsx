@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import { Button, FormGroup, Input, Label, Form } from "reactstrap";
-import { PostItem } from "../../managers/itemManager";
+import { GetOneItem, PostItem } from "../../managers/itemManager";
 
 
-export const ItemForm = ({ itemToEdit, loggedInUser }) => {
+export const ItemForm = ({ loggedInUser }) => {
     const [itemDescription, setItemDescription] = useState("")
     const [itemFloor, setItemFloor] = useState(0)
     const [itemWeight, setItemWeight] = useState(0)
+    const [itemToEdit, setItemToEdit] = useState()
     const { itemId } = useParams()
     const navigate = useNavigate()
 
@@ -24,15 +25,29 @@ export const ItemForm = ({ itemToEdit, loggedInUser }) => {
         })
     }
 
+    const getAndSetOneItem = (id) => {
+        GetOneItem(id).then(setItemToEdit)
+    }
+
     const handleEdit = () => {
         console.log("Quack!!");
     }
 
-    if (itemToEdit != null){
-        setItemDescription(itemToEdit.description)
-        setItemFloor(itemToEdit.floorId)
-        setItemWeight(itemToEdit.weight)
-    }
+    useEffect(() => {
+        if (itemId != null) {
+            getAndSetOneItem(itemId)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (itemToEdit != null){
+            setItemDescription(itemToEdit.description)
+            setItemFloor(itemToEdit.floorId)
+            setItemWeight(itemToEdit.weight)
+        }
+    }, [itemToEdit])
+
+    
 
     return (
         <div className="container">
@@ -44,6 +59,7 @@ export const ItemForm = ({ itemToEdit, loggedInUser }) => {
                 <FormGroup>
                     <Label>Item Description</Label>
                     <Input
+                        value={itemDescription}
                         type="text"
                         onChange={(e) => {
                             setItemDescription(e.target.value)
@@ -51,6 +67,7 @@ export const ItemForm = ({ itemToEdit, loggedInUser }) => {
                     />
                     <Label>Item Weight</Label>
                     <Input
+                        value={itemWeight}
                         type="number"
                         onChange={(e) => {
                             setItemWeight(e.target.value)
@@ -58,6 +75,7 @@ export const ItemForm = ({ itemToEdit, loggedInUser }) => {
                     />
                     <Label>Item Floor</Label>
                     <Input
+                        value={itemFloor}
                         type="number"
                         onChange={(e) => {
                             setItemFloor(e.target.value)

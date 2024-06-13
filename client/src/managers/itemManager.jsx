@@ -27,3 +27,7 @@ export const DeleteItem = (id) => {
         body: JSON.stringify(id)
     })
 }
+
+export const GetOneItem = (id) => {
+    return fetch(_apiUrl + `/single/${id}`).then((res) => res.json())
+}
