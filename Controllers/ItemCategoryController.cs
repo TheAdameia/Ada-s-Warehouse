@@ -30,7 +30,7 @@ public class ItemCategoryController : ControllerBase
     {
         _dbContext.ItemCategories.Add(itemCategory);
         _dbContext.SaveChanges();
-        return Created($"api/itemCategorys/{itemCategory.ItemCategoryId}", itemCategory);
+        return Created($"api/itemCategory/{itemCategory.ItemCategoryId}", itemCategory);
     }
 
     [HttpDelete]

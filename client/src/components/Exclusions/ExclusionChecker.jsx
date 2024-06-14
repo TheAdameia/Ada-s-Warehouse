@@ -57,4 +57,6 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => {
 // Also, IF the item WOULD be on the same FLOOR as an ITEM with a CATEGORY that is EXCLUSIVE to the category of the item,
 // it should return as rejected
 
+// still need to mirror Exclusions or rewrite Exclusions
+
 // I am going to need to add DTOs for Floor if this is to function as expected. Needs to be fully expanded.

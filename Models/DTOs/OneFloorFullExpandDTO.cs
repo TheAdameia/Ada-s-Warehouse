@@ -7,7 +7,7 @@ public class OneFloorFullExpandDTO
     [Key]
     public int FloorId { get; set; }
     public int MaxStorageWeight { get; set; }
-    public List<Item> Items { get; set; }
+    public List<ItemDTO> Items { get; set; }
     public int TotalWeight
     {
         get
