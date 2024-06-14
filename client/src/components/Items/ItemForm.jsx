@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { Button, FormGroup, Input, Label, Form } from "reactstrap";
 import { EditItem, GetOneItem, PostItem } from "../../managers/itemManager";
 import { ExclusionChecker } from "../Exclusions/ExclusionChecker";
-
+import { GetAllCategories } from "../../managers/categoryManager"
 
 export const ItemForm = ({ loggedInUser }) => {
     const [itemToEdit, setItemToEdit] = useState()
@@ -13,6 +13,8 @@ export const ItemForm = ({ loggedInUser }) => {
         floorId: 0,
         userId: 0,
         itemId: 0})
+    const [categories, setCategories] = useState([])
+    const [selectedCategories, setSelectedCategories] = useState([])
     const { itemId } = useParams()
     const navigate = useNavigate()
 
@@ -29,6 +31,10 @@ export const ItemForm = ({ loggedInUser }) => {
         GetOneItem(id).then(setItemToEdit)
     }
 
+    const getAndSetCategories = () => {
+        GetAllCategories().then(setCategories)
+    }
+
     const handleEdit = (event) => {
         event.preventDefault()
         const editedItem = {...passedItem}
@@ -37,10 +43,23 @@ export const ItemForm = ({ loggedInUser }) => {
         })
     }
 
+    const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target
+        if (checked) {
+            setSelectedCategories([...selectedCategories, value])
+        } else {
+            setSelectedCategories(selectedCategories.filter(c => c !== value))
+        }
+    }
+
     useEffect(() => {
         if (itemId != null) {
             getAndSetOneItem(itemId)
         }
+    }, [])
+
+    useEffect(() => {
+        getAndSetCategories()
     }, [])
 
     useEffect(() => {
@@ -54,8 +73,6 @@ export const ItemForm = ({ loggedInUser }) => {
             setPassedItem(itemCopy)
         }
     }, [itemToEdit])
-
-    
 
     return (
         <div className="container">
@@ -95,9 +112,28 @@ export const ItemForm = ({ loggedInUser }) => {
                             setPassedItem(itemCopy)
                         }}
                     />
+                    <Label>Category Selection</Label>
+                    {
+                        categories.map((category) => {
+                            return (
+                                <div key={category.categoryId}>
+                                    <Input
+                                        
+                                        type="checkbox"
+                                        value={category.name}
+                                        id={category.categoryId}
+                                        name="category"
+                                        onChange={handleCheckboxChange}
+                                    />
+                                    <label htmlFor={category.categoryId}>{category.name}</label>
+                                </div>
+                            )
+                        })
+                    }
                 </FormGroup>
                 <ExclusionChecker
                     passedItem={passedItem}
+                    selectedCategories={selectedCategories}
                 />
                 <>
                     { itemId == null ?
