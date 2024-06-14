@@ -43,12 +43,12 @@ export const ItemForm = ({ loggedInUser }) => {
         })
     }
 
-    const handleCheckboxChange = (e) => {
-        const { value, checked } = e.target
+    const handleCheckboxChange = (e, category) => {
+        const { checked } = e.target
         if (checked) {
-            setSelectedCategories([...selectedCategories, value])
+            setSelectedCategories([...selectedCategories, category])
         } else {
-            setSelectedCategories(selectedCategories.filter(c => c !== value))
+            setSelectedCategories(selectedCategories.filter(c => c.categoryId !== category.categoryId))
         }
     }
 
@@ -123,7 +123,7 @@ export const ItemForm = ({ loggedInUser }) => {
                                         value={category.name}
                                         id={category.categoryId}
                                         name="category"
-                                        onChange={handleCheckboxChange}
+                                        onChange={(event) => handleCheckboxChange(event, category)}
                                     />
                                     <label htmlFor={category.categoryId}>{category.name}</label>
                                 </div>
