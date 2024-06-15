@@ -26,8 +26,7 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //sele
             for (const relation of exclusions) {
                 if (list1Ids.has(relation.categoryId1) && list2Ids.has(relation.categoryId2)) {
                     setExclusionsOk(false)
-                }
-                if (list1Ids.has(relation.categoryId2) && list2Ids.has(relation.categoryId1)) {
+                } else if (list1Ids.has(relation.categoryId2) && list2Ids.has(relation.categoryId1)) {
                     setExclusionsOk(false)
                 } else {
                     setExclusionsOk(true)
