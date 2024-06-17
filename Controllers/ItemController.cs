@@ -44,8 +44,25 @@ public class ItemController : ControllerBase
     //[Authorize]
     public IActionResult CreateItem(Item item)
     {
+
+        //create the new item
         _dbContext.Items.Add(item);
         _dbContext.SaveChanges();
+
+        //check if item categories is null
+        //if not null, add each one to the database with a loop/map. - create a new ItemCategory record with the id from the array and the item id
+        if (item.ItemCategory != null)
+        {
+            foreach (var taco in item.ItemCategory)
+            {
+                ItemCategory ic = new ItemCategory
+                {
+                    ItemId = item.ItemId,
+                    CategoryId = taco.CategoryId
+                };  // this can't be a forof because of supposed conversion issues
+            }
+        }
+
         return Created($"api/items/{item.ItemId}", item);
     }
 

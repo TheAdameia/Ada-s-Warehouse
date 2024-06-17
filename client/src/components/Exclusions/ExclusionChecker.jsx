@@ -30,7 +30,6 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //sele
                     setExclusionsOk(false)
                 } else {
                     setExclusionsOk(true)
-                    console.log("Quack!");
                 }
             }
         }

@@ -37,7 +37,11 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const handleEdit = (event) => {
         event.preventDefault()
-        const editedItem = {...passedItem}
+        const editedItem = {...passedItem,
+            itemCategory: selectedCategories.map(c => ({
+                categoryId: c.categoryId
+            }))
+        }
         EditItem(editedItem).then(() => {
             navigate("/items")
         })
