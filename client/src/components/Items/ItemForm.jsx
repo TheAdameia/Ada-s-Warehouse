@@ -12,7 +12,8 @@ export const ItemForm = ({ loggedInUser }) => {
         weight: 0, 
         floorId: 0,
         userId: 0,
-        itemId: 0})
+        itemId: 0
+    })
     const [categories, setCategories] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const { itemId } = useParams()
@@ -20,8 +21,13 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const newItem = {...passedItem}
-        newItem.userId = loggedInUser.id
+        const newItem = {...passedItem,
+            userId: loggedInUser.id,
+            itemCategory: selectedCategories.map(category => ({
+                itemId: passedItem.itemId,
+                categoryId: category.categoryId
+            }))
+        }
         PostItem(newItem).then(() => {
             navigate("/items")
         })

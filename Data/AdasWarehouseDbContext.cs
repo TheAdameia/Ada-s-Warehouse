@@ -134,6 +134,11 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             }
         });
 
+        modelBuilder.Entity<Item>()
+            .HasMany(i => i.ItemCategory)
+            .WithOne(ic => ic.Item)
+            .HasForeignKey(ic => ic.ItemId);
+
         modelBuilder.Entity<Item>().HasData(new Item[]
         {
             new Item

@@ -10,7 +10,10 @@ export default function ApplicationViews({ loggedInUser, setLoggedInUser }) {
   return (
     <Routes>
       <Route path="/">
-      <Route index element={<FloorList />} />
+      <Route index element={
+        <AuthorizedRoute loggedInUser={loggedInUser}>
+          <FloorList /> 
+        </AuthorizedRoute> } />
         <Route
           path="login"
           element={<Login setLoggedInUser={setLoggedInUser} />}

@@ -34,6 +34,7 @@ public class ItemController : ControllerBase
     }
 
     [HttpGet("single/{id}")]
+    // [Authorize]
     public IActionResult GetOneItem(int id)
     {
         return Ok(_dbContext.Items
@@ -44,6 +45,13 @@ public class ItemController : ControllerBase
     //[Authorize]
     public IActionResult CreateItem(Item item)
     {
+        if (item.ItemCategory != null && item.ItemCategory.Count > 0)
+        {
+            foreach (var category in item.ItemCategory)
+            {
+                category.Item = item;
+            }
+        }
         _dbContext.Items.Add(item);
         _dbContext.SaveChanges();
         return Created($"api/items/{item.ItemId}", item);
@@ -74,8 +82,6 @@ public class ItemController : ControllerBase
     [HttpDelete("{id}")]
     //[Authorize]
     public IActionResult DeleteItem(int id)
-    // ok. This works but it doesn't delete ItemCategory. Will have to fix that.
-    // Will fix instead by implementing a soft delete.
     {
         Item itemToDelete = _dbContext.Items.SingleOrDefault(i => i.ItemId == id);
         if (itemToDelete.ItemId == null)
