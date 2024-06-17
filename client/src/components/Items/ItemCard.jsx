@@ -6,8 +6,8 @@ import { DeleteItem } from "../../managers/itemManager"
 export const ItemCard = ({ item, getAndSetItems }) => {
     const navigate = useNavigate()
 
-    const handleDelete = () => {
-        DeleteItem(item.itemId).then(() => {
+    const handleDelete = (id) => {
+        DeleteItem(id).then(() => {
             getAndSetItems()
         })
     }
@@ -22,12 +22,12 @@ export const ItemCard = ({ item, getAndSetItems }) => {
                 <CardTitle tag="h5">Item {item.itemId}: {item.description}</CardTitle>
                 <CardSubtitle>Owner: User #{item.userId}</CardSubtitle>
                 <CardText>Weight: {item.weight}</CardText>
-                <CardText></CardText>
+                <CardText>Floor: {item.floorId}</CardText>
                 <Button
                     onClick={() => handleEdit(item.itemId)}
                 >Edit Item</Button>
                 <Button
-                    onClick={() => handleDelete}
+                    onClick={() => handleDelete(item.itemId)}
                 >Delete Item</Button>
             </CardBody>
         </Card>

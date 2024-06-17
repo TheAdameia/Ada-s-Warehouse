@@ -11,9 +11,9 @@ export const FloorCard = ({ floor }) => {
                 <CardTitle tag="h5">Floor #{floor.floorId}</CardTitle>
                 {floor.isOverloaded == true ? 
                     <CardSubtitle>Capacity reached, {floor.totalWeight} exceeds limit of {floor.maxStorageWeight}</CardSubtitle> :
-                    <CardSubtitle>Can hold {floor.remainingStorage} worth of items out of a total of {floor.maxStorageWeight}</CardSubtitle>
+                    <CardSubtitle>Can hold {floor.remainingStorage} worth of items out of a total of {floor.maxStorageWeight}. The floor is {((floor.totalWeight / floor.maxStorageWeight) * 100).toFixed(2)}% full.</CardSubtitle>
                 }
-                <CardText>Floor #{floor.floorId} contains {numberOfItems} {numberOfItems === 1 ? "item" : "items"} </CardText>
+                <CardText>Floor #{floor.floorId} contains {numberOfItems} {numberOfItems === 1 ? "item" : "items"}.</CardText>
             </CardBody>
         </Card>
     )
