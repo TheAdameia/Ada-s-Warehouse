@@ -34,7 +34,9 @@ export const ItemForm = ({ loggedInUser }) => {
     }
 
     const getAndSetOneItem = (id) => {
+        console.log("getAndSetOneItem:"+id)
         GetOneItem(id).then(setItemToEdit)
+        // ok, now that we have the item, we go ahead and get the categories, 
     }
 
     const getAndSetCategories = () => {
@@ -63,16 +65,19 @@ export const ItemForm = ({ loggedInUser }) => {
     }
 
     useEffect(() => {
+        console.log("useEffect 0", itemId)
         if (itemId != null) {
             getAndSetOneItem(itemId)
         }
-    }, [])
+    }, [itemId])
 
     useEffect(() => {
+        console.log("getAndSetCategories")
         getAndSetCategories()
     }, [])
 
     useEffect(() => {
+        console.log("useEffect 1", itemToEdit)
         if (itemToEdit){
             const itemCopy = {...passedItem}
             itemCopy.description = itemToEdit.description
@@ -86,6 +91,7 @@ export const ItemForm = ({ loggedInUser }) => {
     }, [itemToEdit])
 
     useEffect(() => {
+        console.log("useEffect 2", itemToEdit)
         let preexistingCategory = []
         if (itemToEdit && itemToEdit.itemCategory){
             preexistingCategory = itemToEdit.itemCategory.map(ic => ic.category)
