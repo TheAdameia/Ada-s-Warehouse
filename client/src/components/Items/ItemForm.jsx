@@ -16,6 +16,7 @@ export const ItemForm = ({ loggedInUser }) => {
         itemCategory: []})
     const [categories, setCategories] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
+    const [existingcategories, setExistingCategories] = useState([])
     const { itemId } = useParams()
     const navigate = useNavigate()
 
@@ -81,8 +82,19 @@ export const ItemForm = ({ loggedInUser }) => {
             itemCopy.itemId = itemToEdit.itemId
             itemCopy.itemCategory = itemToEdit.itemCategory
             setPassedItem(itemCopy)
-            // setSelectedCategories(itemToEdit.itemCategory)
         }
+    }, [itemToEdit])
+
+    useEffect(() => {
+        let preexistingCategory = []
+        if (itemToEdit && itemToEdit.itemCategory){
+            preexistingCategory = itemToEdit.itemCategory.map(ic => ic.category)
+        }
+
+        if (preexistingCategory != [])
+            {
+                setExistingCategories(preexistingCategory)
+            }
     }, [itemToEdit])
 
     return (
@@ -126,6 +138,12 @@ export const ItemForm = ({ loggedInUser }) => {
                     <Label>Category Selection</Label>
                     {
                         categories.map((category) => {
+                            let hasDefault = false
+                            for (const single of existingcategories) {
+                                if (category.categoryId == single.categoryId){
+                                    hasDefault = true
+                                }
+                            }
                             return (
                                 <div key={category.categoryId}>
                                     <Input
@@ -134,6 +152,7 @@ export const ItemForm = ({ loggedInUser }) => {
                                         id={category.categoryId}
                                         name="category"
                                         onChange={(event) => handleCheckboxChange(event, category)}
+                                        defaultChecked={hasDefault}
                                     />
                                     <label htmlFor={category.categoryId}>{category.name}</label>
                                 </div>
