@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { GetOneFloor } from "../../managers/floorManager"
 import { GetAllExclusions } from "../../managers/exclusionManager"
 import { GetFloorCategories } from "../../managers/categoryManager"
+import "./Exclusion.css"
 
 export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //selectedCategories is list 1
     const [oneFloor, setOneFloor] = useState({})
@@ -64,10 +65,10 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //sele
     return (
         <div>
             <div>
-                {oneFloor.remainingStorage < passedItem.weight ? "WARNING: maximum weight exceeded" : "weight within capacity"}
+                {oneFloor.remainingStorage < passedItem.weight ? <div className="warning-message">WARNING: maximum weight exceeded</div> : <div className="safe-message">weight within capacity</div>}
             </div>
             <div>
-                {exclusionsOk == true ? "No exclusions": "WARNING: MUTUALLY INCOMPATIBLE CATEGORIES ON FLOOR"}
+                {exclusionsOk == true ? <div className="safe-message">No exclusions</div> : <div className="warning-message">WARNING: MUTUALLY INCOMPATIBLE CATEGORIES ON FLOOR</div>}
             </div>
         </div>
     )

@@ -4,6 +4,7 @@ import { Button, FormGroup, Input, Label, Form } from "reactstrap";
 import { EditItem, GetOneItem, PostItem } from "../../managers/itemManager";
 import { ExclusionChecker } from "../Exclusions/ExclusionChecker";
 import { GetAllCategories } from "../../managers/categoryManager"
+import "./ItemForm.css"
 
 export const ItemForm = ({ loggedInUser }) => {
     const [itemToEdit, setItemToEdit] = useState()
@@ -81,7 +82,7 @@ export const ItemForm = ({ loggedInUser }) => {
             <h4>Edit your Item</h4>
             }
             <Form>
-                <FormGroup>
+                <FormGroup className="form-group">
                     <Label>Item Description</Label>
                     <Input
                         value={passedItem.description}
@@ -113,23 +114,25 @@ export const ItemForm = ({ loggedInUser }) => {
                         }}
                     />
                     <Label>Category Selection</Label>
-                    {
-                        categories.map((category) => {
-                            return (
-                                <div key={category.categoryId}>
-                                    <Input
-                                        
-                                        type="checkbox"
-                                        value={category.name}
-                                        id={category.categoryId}
-                                        name="category"
-                                        onChange={(event) => handleCheckboxChange(event, category)}
-                                    />
-                                    <label htmlFor={category.categoryId}>{category.name}</label>
-                                </div>
-                            )
-                        })
-                    }
+                    <div className="checkbox-group">
+                        {
+                            categories.map((category) => {
+                                return (
+                                    <div key={category.categoryId}>
+                                        <Input
+                                            
+                                            type="checkbox"
+                                            value={category.name}
+                                            id={category.categoryId}
+                                            name="category"
+                                            onChange={(event) => handleCheckboxChange(event, category)}
+                                        />
+                                        <label htmlFor={category.categoryId}>{category.name}</label>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </FormGroup>
                 <ExclusionChecker
                     passedItem={passedItem}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { ItemCard } from "./ItemCard"
 import { GetUserItems } from "../../managers/itemManager"
+import "./ItemList.css"
 
 
 export const ItemList = ({ loggedInUser }) => {
@@ -15,9 +16,9 @@ export const ItemList = ({ loggedInUser }) => {
     }, [])
 
     return (
-        <div className="items-container">
+        <div className="container">
             <h2>My Items</h2>
-            <article className="items">
+            <article>
                 {items.map((item) => {
                     return (
                         <ItemCard
