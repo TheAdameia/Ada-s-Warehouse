@@ -12,7 +12,8 @@ export const ItemForm = ({ loggedInUser }) => {
         weight: 0, 
         floorId: 0,
         userId: 0,
-        itemId: 0})
+        itemId: 0,
+        itemCategory: []})
     const [categories, setCategories] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const { itemId } = useParams()
@@ -20,7 +21,11 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const newItem = {...passedItem}
+        const newItem = {...passedItem,
+            itemCategory: selectedCategories.map(c => ({
+                categoryId: c.categoryId
+            }))
+        }
         newItem.userId = loggedInUser.id
         PostItem(newItem).then(() => {
             navigate("/items")
@@ -74,7 +79,9 @@ export const ItemForm = ({ loggedInUser }) => {
             itemCopy.weight = itemToEdit.weight
             itemCopy.userId = itemToEdit.userId
             itemCopy.itemId = itemToEdit.itemId
+            itemCopy.itemCategory = itemToEdit.itemCategory
             setPassedItem(itemCopy)
+            // setSelectedCategories(itemToEdit.itemCategory)
         }
     }, [itemToEdit])
 
@@ -122,7 +129,6 @@ export const ItemForm = ({ loggedInUser }) => {
                             return (
                                 <div key={category.categoryId}>
                                     <Input
-                                        
                                         type="checkbox"
                                         value={category.name}
                                         id={category.categoryId}
