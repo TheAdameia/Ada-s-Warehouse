@@ -12,7 +12,8 @@ export const ItemForm = ({ loggedInUser }) => {
         weight: 0, 
         floorId: 0,
         userId: 0,
-        itemId: 0})
+        itemId: 0,
+        itemCategory: []})
     const [categories, setCategories] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
     const { itemId } = useParams()
@@ -20,7 +21,11 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        const newItem = {...passedItem}
+        const newItem = {...passedItem,
+            itemCategory: selectedCategories.map(c => ({
+                categoryId: c.categoryId
+            }))
+        }
         newItem.userId = loggedInUser.id
         PostItem(newItem).then(() => {
             navigate("/items")
@@ -29,6 +34,7 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const getAndSetOneItem = (id) => {
         GetOneItem(id).then(setItemToEdit)
+        // ok, now that we have the item, we go ahead and get the categories, 
     }
 
     const getAndSetCategories = () => {
@@ -37,7 +43,11 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const handleEdit = (event) => {
         event.preventDefault()
-        const editedItem = {...passedItem}
+        const editedItem = {...passedItem,
+            itemCategory: selectedCategories.map(c => ({
+                categoryId: c.categoryId
+            }))
+        }
         EditItem(editedItem).then(() => {
             navigate("/items")
         })
@@ -56,7 +66,7 @@ export const ItemForm = ({ loggedInUser }) => {
         if (itemId != null) {
             getAndSetOneItem(itemId)
         }
-    }, [])
+    }, [itemId])
 
     useEffect(() => {
         getAndSetCategories()
@@ -70,8 +80,21 @@ export const ItemForm = ({ loggedInUser }) => {
             itemCopy.weight = itemToEdit.weight
             itemCopy.userId = itemToEdit.userId
             itemCopy.itemId = itemToEdit.itemId
+            itemCopy.itemCategory = itemToEdit.itemCategory
             setPassedItem(itemCopy)
         }
+    }, [itemToEdit])
+
+    useEffect(() => {
+        let preexistingCategory = []
+        if (itemToEdit && itemToEdit.itemCategory){
+            preexistingCategory = itemToEdit.itemCategory.map(ic => ic.category)
+        }
+
+        if (preexistingCategory != [])
+            {
+                setSelectedCategories(preexistingCategory)
+            }
     }, [itemToEdit])
 
     return (
@@ -115,15 +138,21 @@ export const ItemForm = ({ loggedInUser }) => {
                     <Label>Category Selection</Label>
                     {
                         categories.map((category) => {
+                            let hasDefault = false
+                            for (const single of selectedCategories) {
+                                if (category.categoryId == single.categoryId){
+                                    hasDefault = true
+                                }
+                            }
                             return (
                                 <div key={category.categoryId}>
                                     <Input
-                                        
                                         type="checkbox"
                                         value={category.name}
                                         id={category.categoryId}
                                         name="category"
                                         onChange={(event) => handleCheckboxChange(event, category)}
+                                        checked={hasDefault}
                                     />
                                     <label htmlFor={category.categoryId}>{category.name}</label>
                                 </div>
