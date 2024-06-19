@@ -37,6 +37,8 @@ public class ItemController : ControllerBase
     public IActionResult GetOneItem(int id)
     {
         return Ok(_dbContext.Items
+        .Include(i => i.ItemCategory)
+            .ThenInclude(ic => ic.Category)
         .SingleOrDefault(i => i.ItemId == id));
     }
 
@@ -44,8 +46,11 @@ public class ItemController : ControllerBase
     //[Authorize]
     public IActionResult CreateItem(Item item)
     {
+
+        //create the new item
         _dbContext.Items.Add(item);
         _dbContext.SaveChanges();
+
         return Created($"api/items/{item.ItemId}", item);
     }
 
@@ -53,7 +58,10 @@ public class ItemController : ControllerBase
     //[Authorize]
     public IActionResult EditItem(Item item)
     {
-        Item itemToUpdate = _dbContext.Items.SingleOrDefault(i => i.ItemId == item.ItemId);
+        Item itemToUpdate = _dbContext.Items
+        .Include(i => i.ItemCategory)
+        .SingleOrDefault(i => i.ItemId == item.ItemId);
+
         if (itemToUpdate == null)
         {
             return NotFound();
@@ -67,6 +75,32 @@ public class ItemController : ControllerBase
         itemToUpdate.FloorId = item.FloorId;
         itemToUpdate.Weight = item.Weight;
 
+        if (item.ItemCategory != null)
+        {
+            var existingIC = itemToUpdate.ItemCategory.ToList();
+            var newCategories = item.ItemCategory.Select(ic => ic.CategoryId).ToList();
+
+            foreach (var single in existingIC)
+            {
+                if (!newCategories.Contains(single.CategoryId))
+                {
+                    _dbContext.ItemCategories.Remove(single);
+                }
+            }
+
+            foreach (var newCategoryId in newCategories)
+            {
+                if (!existingIC.Any(eic => eic.CategoryId == newCategoryId))
+                {
+                    _dbContext.ItemCategories.Add(new ItemCategory
+                    {
+                        ItemId = item.ItemId,
+                        CategoryId = newCategoryId
+                    });
+                }
+            }
+        }
+
         _dbContext.SaveChanges();
         return NoContent();
     }
@@ -74,8 +108,6 @@ public class ItemController : ControllerBase
     [HttpDelete("{id}")]
     //[Authorize]
     public IActionResult DeleteItem(int id)
-    // ok. This works but it doesn't delete ItemCategory. Will have to fix that.
-    // Will fix instead by implementing a soft delete.
     {
         Item itemToDelete = _dbContext.Items.SingleOrDefault(i => i.ItemId == id);
         if (itemToDelete.ItemId == null)
