@@ -16,7 +16,6 @@ export const ItemForm = ({ loggedInUser }) => {
         itemCategory: []})
     const [categories, setCategories] = useState([])
     const [selectedCategories, setSelectedCategories] = useState([])
-    const [existingcategories, setExistingCategories] = useState([])
     const { itemId } = useParams()
     const navigate = useNavigate()
 
@@ -34,7 +33,6 @@ export const ItemForm = ({ loggedInUser }) => {
     }
 
     const getAndSetOneItem = (id) => {
-        console.log("getAndSetOneItem:"+id)
         GetOneItem(id).then(setItemToEdit)
         // ok, now that we have the item, we go ahead and get the categories, 
     }
@@ -65,19 +63,16 @@ export const ItemForm = ({ loggedInUser }) => {
     }
 
     useEffect(() => {
-        console.log("useEffect 0", itemId)
         if (itemId != null) {
             getAndSetOneItem(itemId)
         }
     }, [itemId])
 
     useEffect(() => {
-        console.log("getAndSetCategories")
         getAndSetCategories()
     }, [])
 
     useEffect(() => {
-        console.log("useEffect 1", itemToEdit)
         if (itemToEdit){
             const itemCopy = {...passedItem}
             itemCopy.description = itemToEdit.description
@@ -91,7 +86,6 @@ export const ItemForm = ({ loggedInUser }) => {
     }, [itemToEdit])
 
     useEffect(() => {
-        console.log("useEffect 2", itemToEdit)
         let preexistingCategory = []
         if (itemToEdit && itemToEdit.itemCategory){
             preexistingCategory = itemToEdit.itemCategory.map(ic => ic.category)
@@ -99,7 +93,7 @@ export const ItemForm = ({ loggedInUser }) => {
 
         if (preexistingCategory != [])
             {
-                setExistingCategories(preexistingCategory)
+                setSelectedCategories(preexistingCategory)
             }
     }, [itemToEdit])
 
@@ -145,7 +139,7 @@ export const ItemForm = ({ loggedInUser }) => {
                     {
                         categories.map((category) => {
                             let hasDefault = false
-                            for (const single of existingcategories) {
+                            for (const single of selectedCategories) {
                                 if (category.categoryId == single.categoryId){
                                     hasDefault = true
                                 }
@@ -158,7 +152,7 @@ export const ItemForm = ({ loggedInUser }) => {
                                         id={category.categoryId}
                                         name="category"
                                         onChange={(event) => handleCheckboxChange(event, category)}
-                                        defaultChecked={hasDefault}
+                                        checked={hasDefault}
                                     />
                                     <label htmlFor={category.categoryId}>{category.name}</label>
                                 </div>
