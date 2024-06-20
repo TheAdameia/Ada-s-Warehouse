@@ -74,8 +74,3 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //sele
         </div>
     )
 }
-
-// Also, IF the item WOULD be on the same FLOOR as an ITEM with a CATEGORY that is EXCLUSIVE to the category of the item,
-// it should return as rejected
-
-// still need to mirror Exclusions or rewrite Exclusions

@@ -1,8 +1,7 @@
 
 Extras that make sense but aren't in stretch goals:
 
-1. Display categories for items
-2. Display exclusions for floors
-3. Display actual owner name on items
-4. Add DTOs for the rest of the returns for security and sensibility
-5. Make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
+1. Display exclusions for floors
+2. Display actual owner name on items
+3. Add DTOs for the rest of the returns for security and sensibility
+4. Make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.

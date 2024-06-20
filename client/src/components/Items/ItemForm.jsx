@@ -35,7 +35,6 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const getAndSetOneItem = (id) => {
         GetOneItem(id).then(setItemToEdit)
-        // ok, now that we have the item, we go ahead and get the categories, 
     }
 
     const getAndSetCategories = () => {
