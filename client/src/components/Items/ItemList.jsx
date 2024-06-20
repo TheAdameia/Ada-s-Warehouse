@@ -16,9 +16,9 @@ export const ItemList = ({ loggedInUser }) => {
     }, [])
 
     return (
-        <div className="container">
+        <div className="item-container">
             <h2>My Items</h2>
-            <article>
+            <article className="item-article">
                 {items.map((item) => {
                     return (
                         <ItemCard

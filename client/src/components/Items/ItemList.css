@@ -1,11 +1,15 @@
-.container {
+.item-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5%;
     gap: 20px; /* Adjust the gap between items as needed */
 }
 
-article {
+.item-article {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 20px; /* Adjust the gap between items as needed */
 }
