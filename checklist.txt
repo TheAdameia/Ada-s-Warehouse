@@ -1,7 +1,11 @@
-
-Extras that make sense but aren't in stretch goals:
+Small Extras:
 
 1. Display exclusions for floors
 2. Display actual owner name on items
 3. Add DTOs for the rest of the returns for security and sensibility
 4. Make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
+
+
+Big expansion goals:
+
+1. Have multiple warehouse locations. Be able to transfer between warehouses.
