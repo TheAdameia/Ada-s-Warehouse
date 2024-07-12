@@ -2,10 +2,32 @@ Small Extras:
 
 1. Display exclusions for floors
 2. Display actual owner name on items
-3. Add DTOs for the rest of the returns for security and sensibility
+3. Add DTOs for the rest of the returns for security and ease of use
 4. Make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
 
 
 Big expansion goals:
 
 1. Have multiple warehouse locations. Be able to transfer between warehouses.
+
+What DB models will need to be changed so that multiple warehouses can be supported?
+1. A new warehouse class will need to be created. ID, name, location (any other properties?)
+2. Floors will need a new floor ID because I've been using the PK for floor numbers + warehouse ID
+3. Items will need warehouse ID.
+IC, UP, Excl, Cat should not need to be changed. Endpoint logic will need to be adjusted for anything involving things other than those.
+
+What routes and pages will need to be changed or modified to support viewing multiple warehouses?
+1. It would be most economical to have a drop down selection that filters items from different warehouses. Ditto for warehouse view.
+
+What discrete changes does this entail?
+1. New Warehouse DB model ✔
+2. Modify Item model
+3. Modify Floor model
+4. Create CRUD endpoints for Warehouse model
+5. Modify get/post/put endpoints for Item to account for additional key
+6. Modify get/post/put endpoints for Floor to account for additional key
+7. Modify Warehouse home page to allow for viewing multiple warehouses
+8. Modify "my item" page to allow for viewing multiple warehouses
+9. Create new PUT endpoint for item to allow for transfer
+10. Allow the transfer page to access exclusion logic
+11. Update seeded data with new keys and new model

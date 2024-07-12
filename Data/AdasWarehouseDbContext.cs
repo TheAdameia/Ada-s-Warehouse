@@ -87,6 +87,20 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             }
         });
 
+        modelBuilder.Entity<Warehouse>().HasData( new Warehouse[]
+        {
+            new Warehouse
+            {
+                WarehouseId = 1,
+                Location = "Hermitage"
+            },
+            new Warehouse
+            {
+                WarehouseId = 2,
+                Location = "Belle Meade"
+            }
+        });
+
         modelBuilder.Entity<Exclusion>().HasData(new Exclusion[]
         {
             new Exclusion
