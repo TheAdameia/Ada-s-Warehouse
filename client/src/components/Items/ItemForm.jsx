@@ -4,6 +4,7 @@ import { Button, FormGroup, Input, Label, Form } from "reactstrap";
 import { EditItem, GetOneItem, PostItem } from "../../managers/itemManager";
 import { ExclusionChecker } from "../Exclusions/ExclusionChecker";
 import { GetAllCategories } from "../../managers/categoryManager"
+import "./ItemForm.css"
 
 export const ItemForm = ({ loggedInUser }) => {
     const [itemToEdit, setItemToEdit] = useState()
@@ -34,7 +35,6 @@ export const ItemForm = ({ loggedInUser }) => {
 
     const getAndSetOneItem = (id) => {
         GetOneItem(id).then(setItemToEdit)
-        // ok, now that we have the item, we go ahead and get the categories, 
     }
 
     const getAndSetCategories = () => {
@@ -104,7 +104,7 @@ export const ItemForm = ({ loggedInUser }) => {
             <h4>Edit your Item</h4>
             }
             <Form>
-                <FormGroup>
+                <FormGroup className="form-group">
                     <Label>Item Description</Label>
                     <Input
                         value={passedItem.description}
@@ -136,6 +136,7 @@ export const ItemForm = ({ loggedInUser }) => {
                         }}
                     />
                     <Label>Category Selection</Label>
+                    <div className="checkbox-group">
                     {
                         categories.map((category) => {
                             let hasDefault = false
@@ -159,6 +160,7 @@ export const ItemForm = ({ loggedInUser }) => {
                             )
                         })
                     }
+                    </div>
                 </FormGroup>
                 <ExclusionChecker
                     passedItem={passedItem}

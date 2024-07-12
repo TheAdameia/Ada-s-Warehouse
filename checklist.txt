@@ -1,43 +1,11 @@
+Small Extras:
+
+1. Display exclusions for floors
+2. Display actual owner name on items
+3. Add DTOs for the rest of the returns for security and sensibility
+4. Make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
 
 
-What controllers are absolutely essential for the MVP wireframe as it exists?
+Big expansion goals:
 
-> Floors ✔
-    1. Get all Floors ✔
-> Categories ✔
-    1. Get all Categories ✔
-> Exclusions ✔
-    1. Get all Exclusions ✔
-> Items ✔
-    1. Get items by user ✔
-    2. Create items ✔
-    3. Edit items ✔
-    4. delete item ✔
-> ItemCategories ✔
-    1. Add ✔
-    2. Delete ✔
-
-everything will have a get all even if it doesn't need it (mostly for testing purposes)
-
-Ok, how do I go about writing the rest of the frontend?
-
-1. Create item navbar button ✔
-2. Create item page, form ✔
-3. edit and delete button for items ✔
-
-I will also need to do the following per userstories:
-
-1. Edit will need to allow the change of floors and block inappropriate placement per Exclusions
-2. FLoors. Need floors on the main page. Need a calculated property for weight? ✔
-3. Add readme!!!!
-
-Extras that make sense but aren't in stretch goals:
-
-1. Display categories for items
-2. Display exclusions for floors
-3. Display actual owner name on items
-4. Add DTOs for returns for security and sensibility
-5. Make soft delete (and restore) work. Simplest solution is probably just to add an "active" key value.
-
-
-Stretch goals: see capstone proposal
+1. Have multiple warehouse locations. Be able to transfer between warehouses.

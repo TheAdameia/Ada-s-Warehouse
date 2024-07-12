@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { GetOneFloor } from "../../managers/floorManager"
 import { GetAllExclusions } from "../../managers/exclusionManager"
 import { GetFloorCategories } from "../../managers/categoryManager"
+import "./Exclusion.css"
 
 export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //selectedCategories is list 1
     const [oneFloor, setOneFloor] = useState({})
@@ -26,8 +27,10 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //sele
             for (const relation of exclusions) {
                 if (list1Ids.has(relation.categoryId1) && list2Ids.has(relation.categoryId2)) {
                     setExclusionsOk(false)
+                    break
                 } else if (list1Ids.has(relation.categoryId2) && list2Ids.has(relation.categoryId1)) {
                     setExclusionsOk(false)
+                    break
                 } else {
                     setExclusionsOk(true)
                 }
@@ -63,16 +66,11 @@ export const ExclusionChecker = ({ passedItem, selectedCategories }) => { //sele
     return (
         <div>
             <div>
-                {oneFloor.remainingStorage < passedItem.weight ? "WARNING: maximum weight exceeded" : "weight within capacity"}
+                {oneFloor.remainingStorage < passedItem.weight ? <div className="warning-message">WARNING: maximum weight exceeded</div> : <div className="safe-message">weight within capacity</div>}
             </div>
             <div>
-                {exclusionsOk == true ? "No exclusions": "WARNING: MUTUALLY INCOMPATIBLE CATEGORIES ON FLOOR"}
+                {exclusionsOk == true ? <div className="safe-message">No exclusions</div> : <div className="warning-message">WARNING: MUTUALLY INCOMPATIBLE CATEGORIES ON FLOOR</div>}
             </div>
         </div>
     )
 }
-
-// Also, IF the item WOULD be on the same FLOOR as an ITEM with a CATEGORY that is EXCLUSIVE to the category of the item,
-// it should return as rejected
-
-// still need to mirror Exclusions or rewrite Exclusions

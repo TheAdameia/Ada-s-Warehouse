@@ -68,12 +68,12 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Category
             {
                 CategoryId = 3,
-                Name = "Class 3",
+                Name = "Class 3 - nontoxic",
             },
             new Category
             {
                 CategoryId = 4,
-                Name = "Class 4",
+                Name = "Class 4 - utterly harmless",
             },
             new Category
             {
@@ -102,7 +102,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
                 CategoryId1 = 2,
                 CategoryId2 = 5,
                 SafeToPlace = false
-            }
+            },
         });
         
         modelBuilder.Entity<Floor>().HasData(new Floor[]
