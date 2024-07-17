@@ -6,6 +6,7 @@ public class Floor
 {
     [Key]
     public int FloorId { get; set; }
+    public int WarehouseId { get; set; }
     public int MaxStorageWeight { get; set; }
     public List<Item> Items { get; set; }
     public int TotalWeight

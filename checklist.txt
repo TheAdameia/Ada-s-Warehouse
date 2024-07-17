@@ -21,13 +21,18 @@ What routes and pages will need to be changed or modified to support viewing mul
 
 What discrete changes does this entail?
 1. New Warehouse DB model ✔
-2. Modify Item model
-3. Modify Floor model
+2. Modify Item model ✔
+3. Modify Floor model ✔
 4. Create CRUD endpoints for Warehouse model
 5. Modify get/post/put endpoints for Item to account for additional key
-6. Modify get/post/put endpoints for Floor to account for additional key
+6. Modify get endpoint for Floor to account for additional key
 7. Modify Warehouse home page to allow for viewing multiple warehouses
 8. Modify "my item" page to allow for viewing multiple warehouses
 9. Create new PUT endpoint for item to allow for transfer
 10. Allow the transfer page to access exclusion logic
 11. Update seeded data with new keys and new model
+12. Update get/post/put frontend for Item to account for additional key
+13. add post/put/del controllers for Floor
+
+Additionally, I have:
+1. Removed "safetoplace" from exclusions it is unnecessary for the logic I'm using (anything not listed in exclusions is presumed to be safe)

@@ -98,6 +98,11 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             {
                 WarehouseId = 2,
                 Location = "Belle Meade"
+            },
+            new Warehouse
+            {
+                WarehouseId = 3,
+                Location = "Bowling Green"
             }
         });
 
@@ -107,15 +112,13 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             {
                 ExclusionId = 1,
                 CategoryId1 = 1,
-                CategoryId2 = 6,
-                SafeToPlace = false
+                CategoryId2 = 6
             },
             new Exclusion
             {
                 ExclusionId = 2,
                 CategoryId1 = 2,
-                CategoryId2 = 5,
-                SafeToPlace = false
+                CategoryId2 = 5
             },
         });
         
@@ -124,26 +127,31 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Floor
             {
                 FloorId = 1,
+                WarehouseId = 1,
                 MaxStorageWeight = 50000
             },
             new Floor
             {
                 FloorId = 2,
+                WarehouseId = 1,
                 MaxStorageWeight = 35000
             },
             new Floor
             {
                 FloorId = 3,
+                WarehouseId = 1,
                 MaxStorageWeight = 20000
             },
             new Floor
             {
                 FloorId = 4,
+                WarehouseId = 1,
                 MaxStorageWeight = 15000
             },
             new Floor
             {
                 FloorId = 5,
+                WarehouseId = 1,
                 MaxStorageWeight = 10000
             }
         });
@@ -153,6 +161,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 1,
+                WarehouseId = 1,
                 FloorId = 1,
                 Weight = 500,
                 UserId = 1,
@@ -161,6 +170,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 2,
+                WarehouseId = 1,
                 FloorId = 3,
                 Weight = 10000,
                 UserId = 1,
@@ -169,6 +179,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 3,
+                WarehouseId = 1,
                 FloorId = 2,
                 Weight = 15000,
                 UserId = 1,
@@ -177,6 +188,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 4,
+                WarehouseId = 1,
                 FloorId = 1,
                 Weight = 25000,
                 UserId = 1,
@@ -185,6 +197,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
             new Item
             {
                 ItemId = 5,
+                WarehouseId = 1,
                 FloorId = 5,
                 Weight = 3505,
                 UserId = 1,
