@@ -47,7 +47,6 @@ public class ItemController : ControllerBase
     public IActionResult CreateItem(Item item)
     {
 
-        //create the new item
         _dbContext.Items.Add(item);
         _dbContext.SaveChanges();
 
@@ -105,7 +104,6 @@ public class ItemController : ControllerBase
         return NoContent();
     }
 
-    // in all likelihood it will be more expedient to write a different endpoint for changing warehouses that only changes warehouse and floor ids
 
     [HttpPut("transfer/{id}")]
     // [Authorize]

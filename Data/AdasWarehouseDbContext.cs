@@ -13,6 +13,7 @@ public class AdasWarehouseDbContext : IdentityDbContext<IdentityUser>
     public DbSet<Item> Items { get; set; }
     public DbSet<ItemCategory> ItemCategories { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }
+    public DbSet<Warehouse> Warehouses { get; set; }
 
     public AdasWarehouseDbContext(DbContextOptions<AdasWarehouseDbContext> context, IConfiguration config) : base(context)
     {

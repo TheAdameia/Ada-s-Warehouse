@@ -28,6 +28,8 @@ public class FloorController : ControllerBase
         .ToList());
     }
 
+
+    // I'm not sure if I'm going to need to update this any to handle multiple warehouses, considering this is just for the sake of exclusion logic on the frontend. Since there's no reason to do anything with it yet, I won't.
     [HttpGet("{id}")]
     // [Authorize]
     public IActionResult GetOneFloor(int id)
@@ -71,4 +73,44 @@ public class FloorController : ControllerBase
 
         return Ok(fullExpand);
     }
+
+    [HttpPost]
+    // [Authorize]
+    public IActionResult Post(Floor floor)
+    {
+        if (floor == null)
+        {
+            return BadRequest();
+        }
+        else if (floor.WarehouseId == 0)
+        {
+            return BadRequest("no warehouse specified");
+        }
+
+        _dbContext.Floors.Add(floor);
+        _dbContext.SaveChanges();
+        return NoContent();
+    }
+
+    [HttpDelete("{id}")]
+    // [Authorize]
+    public IActionResult Delete(int id)
+    {
+        Floor FloorToDelete = _dbContext.Floors.SingleOrDefault(f => f.FloorId == id);
+        if (FloorToDelete == null)
+        {
+            return BadRequest();
+        }
+
+        if (FloorToDelete.Items != null)
+        {
+            return BadRequest("All items must be removed before floor can be deleted");
+        }
+
+        _dbContext.Floors.Remove(FloorToDelete);
+        _dbContext.SaveChanges();
+        return NoContent();
+    }
+
+    // I will write a PUT if I really have to, but really the only thing that would make sense to change would be the weight capacity.
 }
