@@ -23,7 +23,7 @@ What discrete changes does this entail?
 1. New Warehouse DB model ✔
 2. Modify Item model ✔
 3. Modify Floor model ✔
-4. Create CRUD endpoints for Warehouse model
+4. Create CRUD endpoints for Warehouse model ✔
 5. Modify get/post/put endpoints for Item to account for additional key
 6. Modify get endpoint for Floor to account for additional key
 7. Modify Warehouse home page to allow for viewing multiple warehouses

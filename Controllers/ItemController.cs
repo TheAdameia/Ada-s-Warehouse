@@ -105,6 +105,26 @@ public class ItemController : ControllerBase
         return NoContent();
     }
 
+    // in all likelihood it will be more expedient to write a different endpoint for changing warehouses that only changes warehouse and floor ids
+
+    [HttpPut("transfer/{id}")]
+    // [Authorize]
+    public IActionResult TransferWarehouse(Item item)
+    {
+        Item ItemToTransfer = _dbContext.Items.SingleOrDefault(i => i.ItemId == item.ItemId);
+
+        if (ItemToTransfer == null)
+        {
+            return BadRequest();
+        }
+
+        ItemToTransfer.WarehouseId = item.WarehouseId;
+        ItemToTransfer.FloorId = item.FloorId;
+
+        _dbContext.SaveChanges();
+        return NoContent();
+    }
+
     [HttpDelete("{id}")]
     //[Authorize]
     public IActionResult DeleteItem(int id)

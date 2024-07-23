@@ -33,4 +33,21 @@ public class WarehouseController : ControllerBase
         _dbContext.SaveChanges();
         return Created($"api/warehouse/{warehouse.WarehouseId}", warehouse);
     }
+
+    [HttpDelete]
+    // [Authorize]
+    public IActionResult Delete(int id)
+    {
+        Warehouse WarehouseToDelete = _dbContext.Warehouses.SingleOrDefault(w => w.WarehouseId == id);
+        if (WarehouseToDelete == null)
+        {
+            return NotFound();
+        }
+
+        _dbContext.Warehouses.Remove(WarehouseToDelete);
+        _dbContext.SaveChanges();
+        return NoContent();
+    }
+
+    // I'm not sure what I would want to modify with a PUT, so I'm not going to write one until it is called for.   
 }
