@@ -26,6 +26,9 @@ export const FloorList = () => {
             <h2>Floor Status</h2>
             <label>Warehouse to view:</label>
             <select name="selection" id="selection">
+                <option key="0" value="0">
+                    All Warehouses
+                </option>
                 {
                     warehouses.map((warehouse) => {
                         return (

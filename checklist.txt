@@ -41,7 +41,8 @@ What discrete changes does this entail?
 Additionally, I have:
 1. Removed "safetoplace" from exclusions it is unnecessary for the logic I'm using (anything not listed in exclusions is presumed to be safe)
 
-Apparently I have broken something in postgres...  my endpoint that is triggering is saying floors does not exist. Could this be
-due to an ID issue? Did I set up the database incorrectly?
+I am having an issue where I cannot create a new floor as it needs to have prefilled items. I will have to go through and check if the non-DTO model is being used in any endpoints as it is going to have to be a nullable property for that to work and reset the database once again.
 
-I almost certainly didn't set up the database correctly. Fixed.
+There should be examples of filtering in my previous projects.
+
+Other idea I had: writing tests for my project
