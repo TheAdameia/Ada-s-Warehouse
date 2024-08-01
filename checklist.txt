@@ -33,6 +33,15 @@ What discrete changes does this entail?
 11. Update seeded data with new keys and new model ✔
 12. Update get/post/put frontend for Item to account for additional key
 13. add post/put/del controllers for Floor ✔
+14. Modify floor display to account for floorid not reflecting the actual floor number
+15. Create a manager to handle warehouse endpoints
+16. Create an additional page to display all warehouses
+17. update create items to account for additional warehouses
 
 Additionally, I have:
 1. Removed "safetoplace" from exclusions it is unnecessary for the logic I'm using (anything not listed in exclusions is presumed to be safe)
+
+Apparently I have broken something in postgres...  my endpoint that is triggering is saying floors does not exist. Could this be
+due to an ID issue? Did I set up the database incorrectly?
+
+I almost certainly didn't set up the database correctly. Fixed.
